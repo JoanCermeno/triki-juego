@@ -1,5 +1,5 @@
 const TURNOS = {
-  X: "X",
-  O: "O",
+  X: "✖️",
+  O: "⚪",
 };
 export default TURNOS;

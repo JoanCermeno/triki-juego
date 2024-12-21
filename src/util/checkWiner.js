@@ -18,7 +18,7 @@ export const checkWiner = (board) => {
   const empate = board.filter((cuadro) => cuadro === null);
 
   if (empate.length === 0) {
-    // console.log("cambie a false el ganador");
+    console.log("cambie a false el ganador");
     return false;
   }
 };

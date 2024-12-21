@@ -34,11 +34,14 @@ function App() {
       confetti();
       setWiner(newWiner);
     }
+    if (newWiner === false) {
+      setWiner(false);
+    }
   };
 
   const resetGame = () => {
     setBoard(Array(9).fill(null));
-    setTurno("X");
+    setTurno(TURNOS.X);
     setWiner(null);
   };
 
