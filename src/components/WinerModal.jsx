@@ -1,5 +1,6 @@
+import PropTypes from "prop-types";
+
 const WinerModal = ({ winer, resetGame }) => {
-  //comprobamos si el jugador ha ganado
   if (winer == null) return null;
 
   return (
@@ -12,6 +13,12 @@ const WinerModal = ({ winer, resetGame }) => {
       </div>
     </section>
   );
+};
+
+// Validación de tipos de las props
+WinerModal.propTypes = {
+  winer: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  resetGame: PropTypes.func.isRequired,
 };
 
 export default WinerModal;

@@ -1,11 +1,10 @@
+import PropTypes from "prop-types";
+
 export const Square = ({
   children,
-  updateSquare,
   index,
   isSelected,
-  updateBoard,
-  setTurno,
-  setBoard,
+  updateBoard
 }) => {
   const className = `square ${isSelected ? "is-selected" : ""}`;
 
@@ -19,4 +18,11 @@ export const Square = ({
       {children}
     </div>
   );
+};
+// Validación de tipos de las props
+Square.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number,
+  isSelected: PropTypes.bool,
+  updateBoard: PropTypes.func,
 };

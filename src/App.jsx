@@ -1,14 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import confetti from "canvas-confetti";
 import "./App.css";
 import TURNOS from "./constant/turnos";
 import { checkWiner } from "./util/checkWiner";
 import WinerModal from "./components/WinerModal";
 import { Square } from "./components/Square";
+
 function App() {
-  const [board, setBoard] = useState(Array(9).fill(null));
-  //estado para saber cual jugador inica el juego
-  const [turno, setTurno] = useState(TURNOS.X);
+  useEffect(() => {
+    console.log("useEffect");
+  });
+
+  //leemos el local storage para saber el estado del turno y del board
+  const [board, setBoard] = useState(() => {
+    const board = localStorage.getItem("board");
+    return board ? JSON.parse(board) : Array(9).fill(null);
+  });
+  const [turno, setTurno] = useState(() => {
+    const turno = localStorage.getItem("turno");
+    return turno ? turno : TURNOS.X;
+  });
   //declarando el estado del ganador del juego
   const [winer, setWiner] = useState(null);
 
@@ -23,10 +34,12 @@ function App() {
 
     //ahora pintamos el cuadro al que se le dio click
     const newBoard = [...board];
-
     newBoard[index] = turno;
-    console.log(newBoard);
     setBoard(newBoard);
+    //guardarmos los estados del turno y el board en el local storage
+    localStorage.setItem("turno", newTurn);
+    localStorage.setItem("board", JSON.stringify(newBoard));
+
     //checamos haber si hay un ganador
     let newWiner = checkWiner(newBoard);
 
@@ -43,6 +56,7 @@ function App() {
     setBoard(Array(9).fill(null));
     setTurno(TURNOS.X);
     setWiner(null);
+    localStorage.clear();
   };
 
   return (
